@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ton profil de conducteur</title>
+    <style>
+        :root {
+            --primary-1: #003343;
+            --primary-2: #00CCFF;
+            --neutral-bg: #F7F8F9;
+            --white: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--primary-1);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center; height: 100vh;
+        }
+
+        .screen {
+            width: 360px; height: 720px; /* On garde ta nouvelle hauteur */
+            background: var(--neutral-bg);
+            border-radius: 40px;
+            display: flex; flex-direction: column;
+            padding: 20px; box-sizing: border-box; position: relative;
+        }
+
+        /* Bouton Retour */
+        .btn-back {
+            position: absolute; top: 25px; left: 20px;
+            display: flex; align-items: center; gap: 5px;
+            text-decoration: none; background-color: var(--white);
+            color: var(--primary-1); padding: 8px 12px; border-radius: 12px;
+            border: 1px solid #D2DAE2; font-size: 0.85rem; font-weight: bold;
+            z-index: 10;
+        }
+
+        .header {
+            display: flex; align-items: center; justify-content: flex-end;
+            margin-top: 50px; /* On laisse de la place pour le bouton retour */
+            color: var(--primary-1); font-weight: bold;
+        }
+
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #D2DAE2; margin-left: 5px;}
+        .dot.active { background: var(--primary-2); width: 20px; border-radius: 10px; }
+
+        .question-card {
+            background: var(--white); border-radius: 25px;
+            padding: 20px; margin-top: 20px; text-align: center;
+        }
+
+        .answer-option {
+            background: var(--white); border: 2px solid var(--white);
+            padding: 15px; border-radius: 15px; margin-top: 12px;
+            cursor: pointer; transition: all 0.2s; color: var(--primary-1);
+        }
+
+        /* Effet de sélection "Neutre" car pas de mauvaise réponse */
+        .answer-option:active, .answer-option.selected {
+            border-color: var(--primary-2);
+            background-color: #f0faff;
+        }
+
+        .answer-option strong { display: block; margin-bottom: 4px; color: var(--primary-2); }
+        .answer-option span { font-size: 0.85rem; line-height: 1.3; display: block; }
+    </style>
+</head>
+<body>
+
+<div class="screen">
+    <a href="maintruck.html" class="btn-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Retour
+    </a>
+
+    <div class="header">
+        <span>Étape 2/3</span>
+        <div class="dot"></div>
+        <div class="dot active"></div>
+        <div class="dot"></div>
+    </div>
+
+    <div class="question-card">
+        <h2>Pour toi, si je dis "Permis"...</h2>
+    </div>
+
+    <div class="answer-option" onclick="selectProfile(this)">
+        <strong>A. Je suis terrifié</strong>
+        <span>Moi et les voitures ça fait deux, va falloir bosser !</span>
+    </div>
+
+    <div class="answer-option" onclick="selectProfile(this)">
+        <strong>B. En vrai ça va</strong>
+        <span>Déjà testé sur un parking mais c'est pas encore ça.</span>
+    </div>
+
+    <div class="answer-option" onclick="selectProfile(this)">
+        <strong>C. Tranquille Émile</strong>
+        <span>Je suis plutôt confiant pour la suite.</span>
+    </div>
+
+    <div class="answer-option" onclick="selectProfile(this)">
+        <strong>D. Trop facile</strong>
+        <span>Je vais prendre le minimum d'heures, je l'aurai direct.</span>
+    </div>
+</div>
+
+<script>
+    function selectProfile(element) {
+        // Désactiver les autres clics
+        const options = document.querySelectorAll('.answer-option');
+        options.forEach(opt => opt.style.pointerEvents = 'none');
+        
+        // Marquer la sélection
+        element.classList.add('selected');
+
+        // Rediriger après un court instant vers la fin de l'onboarding
+        setTimeout(() => {
+            alert("Merci ! On prépare ton programme personnalisé...");
+            // window.location.href = "final.html"; 
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
