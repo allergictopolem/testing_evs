@@ -11,7 +11,27 @@
             --neutral-bg: #EFF2F5; /* Neutral 4 */
             --white: #FFFFFF;
         }
+    /* Classe pour la bonne réponse */
+.correct {
+    border-color: #2ecc71 !important;
+    background-color: #eafaf1 !important;
+    color: #27ae60 !important;
+    transition: 0.3s;
+}
 
+/* Classe pour la mauvaise réponse + animation secousse */
+.wrong {
+    border-color: #e74c3c !important;
+    background-color: #fdedec !important;
+    color: #c0392b !important;
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
         body {
             margin: 0;
             background-color: var(--primary-1);
@@ -88,6 +108,32 @@
         .answer-option:active { transform: scale(0.98); }
     </style>
 </head>
+    <script>
+    function checkAnswer(element, isCorrect) {
+        // On récupère toutes les options pour éviter de cliquer plusieurs fois
+        const allOptions = document.querySelectorAll('.answer-option');
+        
+        if (isCorrect) {
+            element.classList.add('correct');
+            // Petit bonus : on fait vibrer le téléphone si c'est possible
+            if (window.navigator.vibrate) window.navigator.vibrate(50);
+            
+            // On attend 1.5 seconde et on redirige (vers une page bravo ou la suite)
+            setTimeout(() => {
+                alert("Bravo ! C'est la bonne attitude à adopter.");
+                // window.location.href = "etape3.html"; // Décommente quand tu auras la page suivante
+            }, 1000);
+            
+        } else {
+            element.classList.add('wrong');
+            // On montre la bonne réponse en même temps pour aider l'utilisateur
+            document.getElementById('correct-answer').classList.add('correct');
+        }
+        
+        // On désactive les clics sur les autres options après le premier choix
+        allOptions.forEach(opt => opt.style.pointerEvents = 'none');
+    }
+</script>
 <body>
 
 <div class="screen">
@@ -104,11 +150,10 @@
         <div class="img-placeholder">IMAGE SITUATION</div>
         <h3>Une ambulance arrive avec ses sirènes, le feu est rouge. Je fais quoi ?</h3>
     </div>
-
-    <div class="answer-option">A. Je reste arrêté, le feu est rouge.</div>
-    <div class="answer-option">B. Je grille le feu pour la laisser passer.</div>
-    <div class="answer-option">C. J'avance prudemment pour dégager le passage.</div>
-    <div class="answer-option">D. Je klaxonne pour prévenir les autres.</div>
+    <div class="answer-option" onclick="checkAnswer(this, false)">A. Je reste arrêté, le feu est rouge.</div>
+    <div class="answer-option" onclick="checkAnswer(this, false)">B. Je grille le feu pour la laisser passer.</div>
+    <div class="answer-option" id="correct-answer" onclick="checkAnswer(this, true)">C. J'avance prudemment pour dégager le passage.</div>
+    <div class="answer-option" onclick="checkAnswer(this, false)">D. Je klaxonne pour prévenir les autres.</div>
 </div>
 
 </body>
