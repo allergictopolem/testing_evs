@@ -8,36 +8,34 @@
         :root {
             --primary-1: #003343;
             --primary-2: #00CCFF;
-            --neutral-bg: #EFF2F5; /* Neutral 4 */
+            --neutral-bg: #EFF2F5;
             --white: #FFFFFF;
         }
-    /* Classe pour la bonne réponse */
-.correct {
-    border-color: #2ecc71 !important;
-    background-color: #eafaf1 !important;
-    color: #27ae60 !important;
-    transition: 0.3s;
-}
-#feedback-message {
-    margin-top: 10px;    /* Réduit de 20px à 10px */
-    font-size: 0.9rem;   /* Un texte un peu plus petit pour gagner de la place */
-}
-.msg-correct { color: #27ae60; }
-.msg-wrong { color: #e74c3c; }
-        
-/* Classe pour la mauvaise réponse + animation secousse */
-.wrong {
-    border-color: #e74c3c !important;
-    background-color: #fdedec !important;
-    color: #c0392b !important;
-    animation: shake 0.4s;
-}
 
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
-}
+        /* Classes d'états */
+        .correct {
+            border-color: #2ecc71 !important;
+            background-color: #eafaf1 !important;
+            color: #27ae60 !important;
+            transition: 0.3s;
+        }
+
+        .wrong {
+            border-color: #e74c3c !important;
+            background-color: #fdedec !important;
+            color: #c0392b !important;
+            animation: shake 0.4s;
+        }
+
+        .msg-correct { color: #27ae60; }
+        .msg-wrong { color: #e74c3c; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
         body {
             margin: 0;
             background-color: var(--primary-1);
@@ -50,32 +48,29 @@
 
         .screen {
             width: 360px;
-            height: auto;
+            height: 720px; /* Taille augmentée pour tout faire rentrer */
             background: var(--neutral-bg);
             border-radius: 40px;
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
-            overflow: hidden;
-            padding: 20px 25px; /* On réduit le padding haut/bas de 40px à 20px */
+            position: relative;
+            padding: 20px 25px;
         }
 
         .header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 50px;
             color: var(--primary-1);
             font-weight: bold;
         }
-        h3 {
-    margin-top: 10px;    /* On réduit l'espace au dessus du titre */
-    margin-bottom: 10px; /* On réduit l'espace sous le titre */
-    font-size: 1.1rem;   /* On réduit un poil la taille si besoin */
-}
+
         .progress-dots {
             display: flex;
             gap: 5px;
-            margin-left: auto;
+            margin-left: 10px;
         }
 
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #D2DAE2; }
@@ -91,7 +86,7 @@
 
         .img-placeholder {
             width: 100%;
-            height: 120px;       /* On réduit la hauteur de l'image de 150px à 120px */            
+            height: 120px;
             background: #D2F3FF;
             border-radius: 15px;
             margin-bottom: 15px;
@@ -100,6 +95,8 @@
             align-items: center;
             color: var(--primary-2);
         }
+
+        h3 { margin: 10px 0; font-size: 1.1rem; }
 
         .answer-option {
             background: var(--white);
@@ -115,104 +112,42 @@
 
         .answer-option:hover { border-color: var(--primary-2); background: #f0faff; }
 
-        .answer-option:active { transform: scale(0.98); }
-  .btn-back {
-    position: absolute;
-    top: 25px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    text-decoration: none;
-    
-    /* MODIFICATIONS ICI */
-    background-color: var(--neutral-bg); /* Ou #F7F8F9 (Gris très clair) */
-    color: var(--primary-1);             /* Ton bleu foncé #003343 */
-    padding: 8px 12px;
-    border-radius: 12px;
-    border: 1px solid #D2DAE2;          /* Une petite bordure pour le relief */
-    
-    font-size: 0.85rem;
-    font-weight: bold;
-    transition: all 0.2s;
-    z-index: 10;
-}
-
-.btn-back:hover {
-    color: var(--primary-2); /* Passe au bleu clair au survol */
-    transform: translateX(-3px); /* Petit effet de glissement vers la gauche */
-}
-
-/* On ajuste un peu le header pour qu'il ne chevauche pas le bouton */
-.header {
-    margin-top: 10px;
-    justify-content: flex-end; /* Pousse "Question 1/3" vers la droite */
-}
-    </style>
-</head>
-   <script>
-    function checkAnswer(element, isCorrect) {
-        const allOptions = document.querySelectorAll('.answer-option');
-        const messageBox = document.getElementById('feedback-message');
-        const correctAnswer = document.getElementById('correct-answer');
-
-        // 1. Affichage visuel immédiat
-        if (isCorrect) {
-            element.classList.add('correct');
-            messageBox.textContent = "Bravo ! C'est la bonne attitude. Maintenant, passe ton permis avec En Voiture Simone.";
-            messageBox.className = "msg-correct";
-        } else {
-            element.classList.add('wrong');
-            correctAnswer.classList.add('correct'); // On montre quand même la bonne réponse
-            messageBox.textContent = "Aïe ! Mauvaise réponse.";
-            messageBox.className = "msg-wrong";
+        .btn-back {
+            position: absolute;
+            top: 25px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            background-color: var(--white);
+            color: var(--primary-1);
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid #D2DAE2;
+            font-size: 0.85rem;
+            font-weight: bold;
+            z-index: 10;
         }
 
-        // 2. Désactiver les clics pour éviter le spam
-        allOptions.forEach(opt => opt.style.pointerEvents = 'none');
-
-        // 3. LE RESET (Après 3 secondes)
-       // ... (ton code précédent pour afficher correct/wrong) ...
-
-        setTimeout(() => {
-            // Au lieu de reset, on redirige vers la deuxième question
-            window.location.href = "profiling.html"; 
-        }, 3000);
-
-            // On vide le message
-            messageBox.textContent = "";
-            messageBox.className = "";
-        }, 3000); // 3000 millisecondes = 3 secondes
-    }
-</script>
+        #feedback-message {
+            margin-top: 20px;
+            font-weight: bold;
+            min-height: 1.2em;
+            text-align: center;
+        }
+    </style>
+</head>
 <body>
 
 <div class="screen">
     <a href="start.html" class="btn-back">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-    </svg>
-    Retour
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Retour
     </a>
+
     <div class="header">
         <span>Question 1/3</span>
-        <div class="progress-dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-    </div>
-
-    <div class="question-card">
-        <div class="img-placeholder">IMAGE SITUATION</div>
-        <h3>Une ambulance arrive avec ses sirènes, le feu est rouge. Je fais quoi ?</h3>
-    </div>
-    <div class="answer-option" onclick="checkAnswer(this, false)">A. Je reste arrêté, le feu est rouge.</div>
-    <div class="answer-option" onclick="checkAnswer(this, false)">B. Je grille le feu pour la laisser passer.</div>
-    <div class="answer-option" id="correct-answer" onclick="checkAnswer(this, true)">C. J'avance prudemment pour dégager le passage.</div>
-    <div class="answer-option" onclick="checkAnswer(this, false)">D. Je klaxonne pour prévenir les autres.</div>
-    <div id="feedback-message" style="margin-top: 20px; font-weight: bold; min-height: 1.2em;"></div>
-</div>
-
-</body>
-</html>
+        <div
