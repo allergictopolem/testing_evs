@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Onboarding</title>
+    <style>
+        :root {
+            --primary-1: #003343;
+            --primary-2: #00CCFF;
+            --neutral-bg: #EFF2F5; /* Neutral 4 */
+            --white: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--primary-1);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .screen {
+            width: 360px;
+            height: 640px;
+            background: var(--neutral-bg);
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-1);
+            font-weight: bold;
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 5px;
+            margin-left: auto;
+        }
+
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #D2DAE2; }
+        .dot.active { background: var(--primary-2); width: 20px; border-radius: 10px; }
+
+        .question-card {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 150px;
+            background: #D2F3FF;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-2);
+        }
+
+        .answer-option {
+            background: var(--white);
+            border: 2px solid var(--white);
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--primary-1);
+            font-weight: 500;
+        }
+
+        .answer-option:hover { border-color: var(--primary-2); background: #f0faff; }
+
+        .answer-option:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+
+<div class="screen">
+    <div class="header">
+        <span>Question 1/3</span>
+        <div class="progress-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="img-placeholder">IMAGE SITUATION</div>
+        <h3>Une ambulance arrive avec ses sirènes, le feu est rouge. Je fais quoi ?</h3>
+    </div>
+
+    <div class="answer-option">A. Je reste arrêté, le feu est rouge.</div>
+    <div class="answer-option">B. Je grille le feu pour la laisser passer.</div>
+    <div class="answer-option">C. J'avance prudemment pour dégager le passage.</div>
+    <div class="answer-option">D. Je klaxonne pour prévenir les autres.</div>
+</div>
+
+</body>
+</html>
