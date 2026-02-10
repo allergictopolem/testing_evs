@@ -172,12 +172,12 @@
         allOptions.forEach(opt => opt.style.pointerEvents = 'none');
 
         // 3. LE RESET (Après 3 secondes)
+       // ... (ton code précédent pour afficher correct/wrong) ...
+
         setTimeout(() => {
-            // On retire les couleurs
-            allOptions.forEach(opt => {
-                opt.classList.remove('correct', 'wrong');
-                opt.style.pointerEvents = 'auto'; // On réactive les clics
-            });
+            // Au lieu de reset, on redirige vers la deuxième question
+            window.location.href = "profiling.html"; 
+        }, 3000);
 
             // On vide le message
             messageBox.textContent = "";
