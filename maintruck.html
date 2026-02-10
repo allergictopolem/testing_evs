@@ -116,7 +116,7 @@
         .answer-option:hover { border-color: var(--primary-2); background: #f0faff; }
 
         .answer-option:active { transform: scale(0.98); }
-        .btn-back {
+  .btn-back {
     position: absolute;
     top: 25px;
     left: 20px;
@@ -124,8 +124,15 @@
     align-items: center;
     gap: 5px;
     text-decoration: none;
-    color: var(--primary-1); /* Ton bleu foncé */
-    font-size: 0.9rem;
+    
+    /* MODIFICATIONS ICI */
+    background-color: var(--neutral-bg); /* Ou #F7F8F9 (Gris très clair) */
+    color: var(--primary-1);             /* Ton bleu foncé #003343 */
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid #D2DAE2;          /* Une petite bordure pour le relief */
+    
+    font-size: 0.85rem;
     font-weight: bold;
     transition: all 0.2s;
     z-index: 10;
