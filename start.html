@@ -36,19 +36,11 @@
             box-sizing: border-box;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-
-        .logo-placeholder {
-            width: 120px;
-            height: 120px;
-            background: var(--secondary-2);
-            border-radius: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 40px;
-            color: var(--primary-2);
-            font-weight: bold;
-            border: 2px dashed var(--primary-2);
+            .app-logo {
+        width: 140px;      /* Ajuste la largeur selon tes goûts */
+        height: auto;      /* Garde les proportions du logo */
+        margin-top: 40px;  /* Garde le même espacement qu'avant */
+        object-fit: contain;
         }
 
         h1 {
@@ -85,12 +77,12 @@
 <body>
 
 <div class="screen">
-    <div class="logo-placeholder">LOGO</div>
+    <img src="evs_logo.png" alt="Logo En Voiture Simone" class="app-logo">
+    
     <h1>Le permis en 30 jours, c'est ici.</h1>
     <p>Rejoins 50 000 élèves et révise avec les séries officielles 2026.</p>
     
     <a href="maintruck.html" class="btn-start">C'EST PARTI !</a>
 </div>
-
 </body>
 </html>
