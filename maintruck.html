@@ -18,7 +18,13 @@
     color: #27ae60 !important;
     transition: 0.3s;
 }
-
+#feedback-message {
+    transition: all 0.3s;
+    text-align: center;
+}
+.msg-correct { color: #27ae60; }
+.msg-wrong { color: #e74c3c; }
+        
 /* Classe pour la mauvaise réponse + animation secousse */
 .wrong {
     border-color: #e74c3c !important;
@@ -108,30 +114,39 @@
         .answer-option:active { transform: scale(0.98); }
     </style>
 </head>
-    <script>
+   <script>
     function checkAnswer(element, isCorrect) {
-        // On récupère toutes les options pour éviter de cliquer plusieurs fois
         const allOptions = document.querySelectorAll('.answer-option');
-        
+        const messageBox = document.getElementById('feedback-message');
+        const correctAnswer = document.getElementById('correct-answer');
+
+        // 1. Affichage visuel immédiat
         if (isCorrect) {
             element.classList.add('correct');
-            // Petit bonus : on fait vibrer le téléphone si c'est possible
-            if (window.navigator.vibrate) window.navigator.vibrate(50);
-            
-            // On attend 1.5 seconde et on redirige (vers une page bravo ou la suite)
-            setTimeout(() => {
-                alert("Bravo ! C'est la bonne attitude à adopter.");
-                // window.location.href = "etape3.html"; // Décommente quand tu auras la page suivante
-            }, 1000);
-            
+            messageBox.textContent = "Bravo ! C'est la bonne attitude.";
+            messageBox.className = "msg-correct";
         } else {
             element.classList.add('wrong');
-            // On montre la bonne réponse en même temps pour aider l'utilisateur
-            document.getElementById('correct-answer').classList.add('correct');
+            correctAnswer.classList.add('correct'); // On montre quand même la bonne réponse
+            messageBox.textContent = "Aïe ! Mauvaise réponse.";
+            messageBox.className = "msg-wrong";
         }
-        
-        // On désactive les clics sur les autres options après le premier choix
+
+        // 2. Désactiver les clics pour éviter le spam
         allOptions.forEach(opt => opt.style.pointerEvents = 'none');
+
+        // 3. LE RESET (Après 3 secondes)
+        setTimeout(() => {
+            // On retire les couleurs
+            allOptions.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.pointerEvents = 'auto'; // On réactive les clics
+            });
+
+            // On vide le message
+            messageBox.textContent = "";
+            messageBox.className = "";
+        }, 3000); // 3000 millisecondes = 3 secondes
     }
 </script>
 <body>
@@ -154,6 +169,7 @@
     <div class="answer-option" onclick="checkAnswer(this, false)">B. Je grille le feu pour la laisser passer.</div>
     <div class="answer-option" id="correct-answer" onclick="checkAnswer(this, true)">C. J'avance prudemment pour dégager le passage.</div>
     <div class="answer-option" onclick="checkAnswer(this, false)">D. Je klaxonne pour prévenir les autres.</div>
+    <div id="feedback-message" style="margin-top: 20px; font-weight: bold; min-height: 1.2em;"></div>
 </div>
 
 </body>
