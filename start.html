@@ -2,93 +2,95 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Onboarding - Code de la Route</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code de la Route - Onboarding</title>
     <style>
         :root {
-            --primary-blue: #00CCFF;
-            --primary-dark: #003343;
-            --accent-red: #FF282B;
-            --neutral-bg: #F7F8F9;
+            --primary-1: #003343;
+            --primary-2: #00CCFF;
+            --tertiary-1: #FF282B;
+            --secondary-2: #FFE6FA;
+            --white: #FFFFFF;
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--neutral-bg);
             margin: 0;
+            background-color: var(--primary-1);
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
 
-        .onboarding-card {
-            background: white;
-            width: 350px;
-            height: 600px;
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .screen {
+            width: 360px;
+            height: 640px;
+            background: var(--white);
+            border-radius: 40px;
             display: flex;
             flex-direction: column;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Barre de progression */
-        .progress-bar {
-            height: 6px;
-            background: #E2E8F0;
-            border-radius: 3px;
-            margin-bottom: 40px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-blue);
-            width: 33%; /* À faire évoluer avec JS */
-            transition: width 0.4s ease;
-        }
-
-        .step-content {
-            flex: 1;
+            align-items: center;
             text-align: center;
+            padding: 40px 25px;
+            box-sizing: border-box;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        h2 { color: var(--primary-dark); font-size: 1.5rem; }
-        p { color: #64748B; line-height: 1.6; }
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background: var(--secondary-2);
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            color: var(--primary-2);
+            font-weight: bold;
+            border: 2px dashed var(--primary-2);
+        }
 
-        .btn-next {
-            background: linear-gradient(135deg, #FFC4F3 0%, #FF282B 100%);
-            color: white;
+        h1 {
+            color: var(--primary-1);
+            margin-top: 40px;
+            font-size: 1.8rem;
+        }
+
+        p {
+            color: #495059; /* Neutral 1 */
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        .btn-start {
+            margin-top: auto;
+            width: 100%;
+            padding: 18px;
             border: none;
-            padding: 15px;
-            border-radius: 15px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #FFC4F3 0%, var(--tertiary-1) 100%);
+            color: white;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            font-size: 1rem;
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
         }
+
+        .btn-start:hover { transform: scale(1.02); }
     </style>
 </head>
 <body>
 
-<div class="onboarding-card">
-    <div class="progress-bar"><div class="progress-fill"></div></div>
+<div class="screen">
+    <div class="logo-placeholder">LOGO</div>
+    <h1>Le permis en 30 jours, c'est ici.</h1>
+    <p>Rejoins 50 000 élèves et révise avec les séries officielles 2026.</p>
     
-    <div class="step-content" id="step-container">
-        <img src="https://via.placeholder.com/150" alt="Illustration" style="margin-bottom: 20px;">
-        <h2>Réussissez votre code !</h2>
-        <p>Préparez-vous n'importe où, n'importe quand, avec nos tests conformes à l'examen 2026.</p>
-    </div>
-
-    <button class="btn-next" onclick="nextStep()">Continuer</button>
+    <a href="question.html" class="btn-start">C'EST PARTI !</a>
 </div>
-
-<script>
-    let currentStep = 1;
-    function nextStep() {
-        // Logique pour changer le texte et la barre de progression
-    }
-</script>
 
 </body>
 </html>
